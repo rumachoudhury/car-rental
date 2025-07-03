@@ -8,6 +8,7 @@ export default function Banner() {
         <h2 className="text-3xl font-medium">Have a Premium Vehicle?</h2>
         <p className="mt-2">
           Earn passive income by renting it out through CarRentals.
+          <span>Hi</span>
         </p>
         <p className="max-w-130">
           We manage insurance, user verification, and secure transactions for
