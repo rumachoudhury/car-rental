@@ -4,10 +4,7 @@ import { assets, cityList } from "../assets/assets";
 export default function Hero() {
   const [pickupLocation, setPickupLocation] = useState("");
   return (
-    <div
-      // className="h-screen flex flex-col justify-center items-center gap-14 bg-light text-center"
-      className="h-screen flex flex-col justify-center items-center gap-14 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 text-center"
-    >
+    <div className="h-screen flex flex-col justify-center items-center gap-14 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 text-center">
       {/* <h1 className="text-3xl md:text-5xl font-semibold sm:mt-30 lg:mt-10">
         Turn Heads with Our Luxury Car Rentals
       </h1> */}
@@ -51,7 +48,6 @@ export default function Hero() {
             <input
               type="date"
               id="return-date"
-              //   min={new Date().toISOString().split("T")[0]}
               className="text-sm text-gray-500"
               required
             />
@@ -68,7 +64,11 @@ export default function Hero() {
         </button>
       </form>
       {/* <img src={assets.main_car} alt="" className="max-h-74" /> */}
-      <img src={assets.group_car} alt="Blue Car" className="max-h-96 w-full" />
+      <img
+        src={assets.group_car}
+        alt="Blue Car"
+        className="max-h-96 w-[80%] rounded-xl"
+      />
     </div>
   );
 }

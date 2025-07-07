@@ -14,6 +14,7 @@ export default function FeaturedSection() {
           subTitle={
             "Explore our most popular and best-value car rental options."
           }
+          showUnderline={false}
         />
       </div>
 

@@ -14,7 +14,7 @@ export default function Banner() {
           you.
         </p>
 
-        <button className="px-6 py-2 bg-white hover:bg-slate-100 transition-all text-gray-500 rounded-lg text-sm mt-4 cursor-pointer">
+        <button className="px-6 py-2 bg-white hover:bg-slate-100 transition-all text-blue-500 rounded-lg text-sm mt-4 cursor-pointer">
           Car List
         </button>
       </div>

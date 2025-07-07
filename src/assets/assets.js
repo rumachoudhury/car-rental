@@ -131,7 +131,7 @@ export const ownerMenuLinks = [
 
 export const dummyUserData = {
   _id: "6847f7cab3d8daecdb517095",
-  name: "GreatStack",
+  name: "Admin User",
   email: "admin@example.com",
   role: "owner",
   image: user_profile,

@@ -24,7 +24,8 @@ function Navbar({ setShowLogin }) {
         } ${open ? "max-sm:translate-x-0" : "max-sm:translate-x-full"}`}
       >
         {menuLinks.map((link, index) => (
-          <Link key={index} to={link.to}>
+          //{link.path} when you click "Cars" or home or My Bookingsor Dashboard  in our navbar, it will correctly navigate to the path
+          <Link key={index} to={link.path}>
             {link.name}
           </Link>
         ))}
