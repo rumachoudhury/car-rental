@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="px-6 sm:px-10 md:px-16 lg:px-24 xl:px-20 py-4 md:py-8 lg:py-12 sm:mt-2 md:mt-14 lg:mt-40  bg-[#95C1FF]">
+    <footer className="px-6 sm:px-10 md:px-16 lg:px-24 xl:px-20 py-4 md:py-8 lg:py-10 sm:mt-2 md:mt-14 lg:mt-40  ">
       <div className="flex flex-col lg:flex-row gap-10 justify-between mt-6">
         {/* Left: Logo + Description + Social Icons */}
         <div className="max-w-xl">
