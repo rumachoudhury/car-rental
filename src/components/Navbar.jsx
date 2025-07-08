@@ -45,7 +45,7 @@ function Navbar({ setShowLogin }) {
           </button>
           <button
             onClick={() => setShowLogin(true)}
-            className="cursor-pointer lg:px-8 sm:px-4 lg:py-2  bg-primary text-gray-700 hover:bg-primary-dull hover:text-white transition-all rounded-lg"
+            className="cursor-pointer lg:px-8 sm:px-4 lg:py-2   text-white bg-blue-500 hover:bg-primary-dull hover:text-white transition-all rounded-lg"
           >
             Login
           </button>

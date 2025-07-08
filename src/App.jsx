@@ -12,12 +12,17 @@ import Dashboard from "./pages/owner/Dashboard";
 import AddCar from "./pages/owner/AddCar";
 import ManageCars from "./pages/owner/ManageCars";
 import ManageBookings from "./pages/owner/ManageBookings";
+import Login from "./components/Login";
 
 export default function App() {
   const [showLogin, setShowLogin] = useState(false);
   const isOwnerPath = useLocation().pathname.startsWith("/owner");
   return (
     <>
+      {/* Only show the <Login /> component if showLogin is true, and show on every page because it's outside the <Routes> */}
+      {showLogin && <Login setShowLogin={setShowLogin} />}
+
+      {/* Only show Navbar if NOT on an /owner route */}
       {!isOwnerPath && <Navbar setShowLogin={setShowLogin} />}
 
       <Routes>
