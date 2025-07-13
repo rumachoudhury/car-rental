@@ -1,19 +1,50 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
-import { assets, dummyMyBookingsData } from "../assets/assets";
+import { useState, useCallback } from "react";
+import { assets } from "../assets/assets";
 import Title from "../components/Title";
+import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 export const MyBookings = () => {
+  const { axios, user, currency } = useAppContext();
   const [bookings, setBookings] = useState([]);
-  const currency = import.meta.env.VITE_CURRENCY;
 
-  const fetchMyBookings = async () => {
-    setBookings(dummyMyBookingsData);
-  };
+  // const fetchMyBookings = async () => {
+  //   try {
+  //     const { data } = await axios.get("/api/bookings/user");
+  //     if (data.success) {
+  //       setBookings(data.bookings);
+  //     } else {
+  //       toast.error(data.message);
+  //     }
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   }
+  // };
+
+  const fetchMyBookings = useCallback(async () => {
+    // update fetchMyBookings to use useCallback
+    try {
+      const { data } = await axios.get("/api/bookings/user");
+      if (data.success) {
+        setBookings(data.bookings);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }, [axios]);
+
+  // useEffect(() => {
+  //   user && fetchMyBookings();
+  // }, [user]);
 
   useEffect(() => {
-    fetchMyBookings();
-  }, []);
+    //now safely include it in the useEffect dependency array
+    user && fetchMyBookings();
+  }, [user, fetchMyBookings]);
+
   return (
     <div className="px-6 md:px-16 lg:px24 xl:px32 2xl:px-32 mt-16 text-sm max-w-7xl">
       <Title

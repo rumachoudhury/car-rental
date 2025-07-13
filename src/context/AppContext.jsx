@@ -36,6 +36,7 @@ export const AppProvider = ({ children }) => {
   const fetchUser = async () => {
     try {
       const { data } = await axios.get("/api/user/data");
+      console.log("Fetched cars:", data); // ✅ ADD THIS LINE
       if (data.success && data.user) {
         setUser(data.user);
         setIsOwner(data.user.role === "owner");
@@ -68,10 +69,20 @@ export const AppProvider = ({ children }) => {
   };
 
   //uaeEffect to retrive token from localStorage
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   setToken(token);
+  //   fetchCars();
+  // }, []);
   useEffect(() => {
     const token = localStorage.getItem("token");
     setToken(token);
-    fetchCars();
+
+    // ✅ Only fetch cars if token exists and attach it first
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `${token}`;
+      fetchCars();
+    }
   }, []);
 
   // uaeEffect to fetch user data when token is available

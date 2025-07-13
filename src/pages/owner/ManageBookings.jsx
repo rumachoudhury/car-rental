@@ -1,18 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { dummyMyBookingsData } from "../../assets/assets";
+import React, { useCallback, useEffect, useState } from "react";
+
 import Title from "../../components/owner/Title";
+import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 function ManageBookings() {
-  const currency = import.meta.env.VITE_CURRENCY;
+  const { axios, currency } = useAppContext();
+
   const [bookings, setBookings] = useState([]);
 
-  const fetchOwnerBooings = async () => {
-    setBookings(dummyMyBookingsData);
+  // const fetchOwnerBooings = async () => {
+  //   try {
+  //     const { data } = await axios.get("/api/bookings/owner");
+  //     data.success ? setBookings(data.bookings) : toast.error(data.message);
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   }
+  // };
+
+  const fetchOwnerBooings = useCallback(async () => {
+    //**useCallback with axios as dependency
+    try {
+      const { data } = await axios.get("/api/bookings/owner");
+      data.success ? setBookings(data.bookings) : toast.error(data.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }, [axios]);
+
+  const changeBooingStatus = async (bookingId, status) => {
+    try {
+      const { data } = await axios.post("/api/bookings/change-status", {
+        bookingId,
+        status,
+      });
+
+      if (data.success) {
+        toast.success(data.message);
+        fetchOwnerBooings();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
+  // useEffect(() => {
+  //   fetchOwnerBooings();
+  // }, []);
+
   useEffect(() => {
+    //** useEffect now has all dependencies
     fetchOwnerBooings();
-  }, []);
+  }, [fetchOwnerBooings]);
 
   return (
     <div className="px-4 pt-10 md:px-10 w-full">
@@ -67,6 +108,9 @@ function ManageBookings() {
                   {/* if Pending it will show the dropdown menu */}
                   {booking.status === "pending" ? (
                     <select
+                      onChange={(e) =>
+                        changeBooingStatus(booking._id, e.target.value)
+                      }
                       value={booking.status}
                       className="px-2 py-1.5 mt-1 text-gray-500 border border-borderColor rounded-md outline-none"
                     >

@@ -1,8 +1,23 @@
 import React, { useState } from "react";
 import { assets, cityList } from "../assets/assets";
+import { useAppContext } from "../context/AppContext";
 
 export default function Hero() {
   const [pickupLocation, setPickupLocation] = useState("");
+  const { pickUpDate, setPickupDate, returnDate, setReturnDate, navigate } =
+    useAppContext();
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(
+      "/cars?pickupLocation=" +
+        pickupLocation +
+        "&pickUpDate=" +
+        pickUpDate +
+        "&returnDate=" +
+        returnDate
+    );
+  };
+
   return (
     <div className="h-screen flex flex-col justify-center items-center gap-14 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 text-center">
       {/* <h1 className="text-3xl md:text-5xl font-semibold sm:mt-30 lg:mt-10">
@@ -11,7 +26,10 @@ export default function Hero() {
       <h1 className="text-3xl md:text-5xl font-semibold bg-gradient-to-r from-sky-400 to-gray-400 bg-clip-text text-transparent">
         Turn Heads with Our Luxury Car Rentals
       </h1>
-      <form className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 rounded-lg md:rounded-full w-full max-w-80 md:max-w-200 bg-white shadow-[0px_8px_20px_rgba(0,0,0,0.1)]">
+      <form
+        onSubmit={handleSearch}
+        className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 rounded-lg md:rounded-full w-full max-w-80 md:max-w-200 bg-white shadow-[0px_8px_20px_rgba(0,0,0,0.1)]"
+      >
         <div className="flex flex-col md:flex-row items-start md:items-center gap-10 min-md:ml-8">
           <div className="flex flex-col items-start gap-2">
             {/* Pickup Location Dropdown */}
@@ -35,6 +53,8 @@ export default function Hero() {
           <div className="flex flex-col items-start gap-2">
             <label htmlFor="pickup-date">Pick-up Date</label>
             <input
+              value={pickUpDate}
+              onChange={(e) => setPickupDate(e.target.value)}
               type="date"
               id="pickup-date"
               min={new Date().toISOString().split("T")[0]}
@@ -46,6 +66,8 @@ export default function Hero() {
           <div className="flex flex-col items-start gap-2">
             <label htmlFor="return-date">Return Date</label>
             <input
+              value={returnDate}
+              onChange={(e) => setReturnDate(e.target.value)}
               type="date"
               id="return-date"
               className="text-sm text-gray-500"

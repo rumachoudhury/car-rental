@@ -1,18 +1,64 @@
 import React, { useEffect, useState } from "react";
-import { assets, dummyCarData } from "../../assets/assets";
+import { assets } from "../../assets/assets";
 import Title from "../../components/owner/Title";
+import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 export default function ManageCars() {
-  const currency = import.meta.env.VITE_CURRENCY;
-  const [car, setCar] = useState([]);
+  const { isOwner, axios, currency } = useAppContext();
+
+  const [cars, setCars] = useState([]);
 
   const fetchOwnerCars = async () => {
-    setCar(dummyCarData);
+    try {
+      const { data } = await axios.get("/api/owner/cars");
+      if (data.success) {
+        setCars(data.cars);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const toggleAvailablity = async (carId) => {
+    try {
+      const { data } = await axios.post("/api/owner/toggle-car", { carId });
+      if (data.success) {
+        toast.success(data.message);
+        fetchOwnerCars();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const deleteCar = async (carId) => {
+    try {
+      const confirm = window.confirm(
+        "Are you sure you want to delete this car?"
+      );
+
+      if (!confirm) return null;
+
+      const { data } = await axios.post("/api/owner/delete-car", { carId });
+      if (data.success) {
+        toast.success(data.message);
+        fetchOwnerCars();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   useEffect(() => {
-    fetchOwnerCars();
-  }, []);
+    isOwner && fetchOwnerCars();
+  }, [isOwner]);
 
   return (
     <div className="px-4 pt-10 md:px-10 w-full">
@@ -34,7 +80,7 @@ export default function ManageCars() {
           </thead>
 
           <tbody>
-            {car.map((car, index) => (
+            {cars.map((car, index) => (
               <tr key={index} className="border-t border-borderColor">
                 <td className="p-3 items-center gap-3">
                   <img
@@ -63,24 +109,18 @@ export default function ManageCars() {
                 <td className="p-3 max-md:hidden">
                   <span
                     className={`px-3 py-1 rounded-full text-xs ${
-                      car.isAvaliable
+                      car.isAvailable
                         ? "bg-green-100 text-green-500"
                         : "bg-red-100 text-red-500"
                     }`}
                   >
-                    {car.isAvaliable ? "Available" : "unavailable"}
+                    {car.isAvailable ? "Available" : "unavailable"}
                   </span>
                 </td>
 
                 <td className="flex items-center p-3">
-                  {/* <img
-                    src={
-                      car.isAvailable ? assets.eye_close_icon : assets.eye_icon
-                    }
-                    alt=""
-                    className="cursor-pointer"
-                  /> */}
                   <img
+                    onClick={() => toggleAvailablity(car._id)}
                     src={
                       car.isAvailable ? assets.eye_icon : assets.eye_close_icon
                     }
@@ -88,7 +128,11 @@ export default function ManageCars() {
                     className="cursor-pointer"
                   />
 
-                  <img src={assets.delete_icon} alt="" />
+                  <img
+                    onClick={() => deleteCar(car._id)}
+                    src={assets.delete_icon}
+                    alt=""
+                  />
                 </td>
               </tr>
             ))}
