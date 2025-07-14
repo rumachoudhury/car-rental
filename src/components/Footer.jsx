@@ -1,25 +1,49 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Footer() {
   return (
-    <footer className="px-6 sm:px-10 md:px-16 lg:px-24 xl:px-20 py-4 md:py-8 lg:py-10 sm:mt-2 md:mt-14 lg:mt-40  ">
-      <div className="flex flex-col lg:flex-row gap-10 justify-between mt-6">
+    <motion.footer
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="px-6 sm:px-10 md:px-16 lg:px-24 xl:px-20 py-4 md:py-8 lg:py-10 sm:mt-2 md:mt-14 lg:mt-40  "
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="flex flex-col lg:flex-row gap-10 justify-between mt-6"
+      >
         {/* Left: Logo + Description + Social Icons */}
         <div className="max-w-xl">
           <Link to="/">
-            <img
+            <motion.img
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
               className="h-20 w-auto cursor-pointer"
               src="/logo-image.jpeg"
               alt="StayVenture logo"
             />
           </Link>
-          <p className="mt-6 text-sm text-gray-900 leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-6 text-sm text-gray-900 leading-relaxed"
+          >
             StayVenture offers luxury car rentals with premium service, seamless
             booking, and exceptional customer care. Discover the road in style
             with us.
-          </p>
-          <div className="flex justify-center lg:justify-start items-center gap-4 mt-6">
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex justify-center lg:justify-start items-center gap-4 mt-6"
+          >
             {/* Social Icons */}
             <a href="#" aria-label="Twitter">
               <svg
@@ -71,118 +95,78 @@ function Footer() {
                 />
               </svg>
             </a>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Right: Resources and Company Links */}
-        {/* <div
-          // className="flex flex-col sm:flex-row gap-10  lg:mt-0"
-          className="sm:flex-col lg:flex-row  sm:justify-center lg:justify-around items-center gap-10 lg:gap-24 mb-14 sm:mr-0 lg:mr-32 sm:ml-20 lg:ml-0"
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-wrap justify-between w-1/2 gap-8"
         >
-          <div>
-            <h2 className="font-semibold text-black mb-4">COMPANY</h2>
-            <ul className="text-sm text-gray-900 space-y-2">
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Browse Cars</a>
-              </li>
-              <li>
-                <a href="#">Car List</a>
-              </li>
-              <li>
-                <a href="#">About Us</a>
-              </li>
-            </ul>
-          </div>
+          <div className="flex flex-col lg:flex-row justify-center lg:justify-around items-center lg:items-start gap-10 lg:gap-24 px-6 sm:px-10 md:px-16 lg:px-0 mb-14">
+            {/* COMPANY */}
+            <div className="text-center lg:text-left">
+              <h2 className="font-semibold text-black mb-4">COMPANY</h2>
+              <ul className="text-sm text-gray-900 space-y-2">
+                <li>
+                  <a href="#">Home</a>
+                </li>
+                <li>
+                  <a href="#">Browse Cars</a>
+                </li>
+                <li>
+                  <a href="#">Car List</a>
+                </li>
+                <li>
+                  <a href="#">About Us</a>
+                </li>
+              </ul>
+            </div>
 
-          <div>
-            <h2 className="font-semibold text-black mb-4"> RESOURCES </h2>
-            <ul className="text-sm text-gray-900 space-y-2">
-              <li>
-                <a href="#">Help Center</a>
-              </li>
-              <li>
-                <a href="#">Insurance</a>
-              </li>
-              <li>
-                <a href="#">Privacy</a>
-              </li>
-              <li>
-                <a href="#">Terms</a>
-              </li>
-            </ul>
-          </div>
+            {/* RESOURCES */}
+            <div className="text-center lg:text-left">
+              <h2 className="font-semibold text-black mb-4">RESOURCES</h2>
+              <ul className="text-sm text-gray-900 space-y-2">
+                <li>
+                  <a href="#">Help Center</a>
+                </li>
+                <li>
+                  <a href="#">Insurance</a>
+                </li>
+                <li>
+                  <a href="#">Privacy</a>
+                </li>
+                <li>
+                  <a href="#">Terms</a>
+                </li>
+              </ul>
+            </div>
 
-          <div>
-            <h2 className="font-semibold text-black mt-0 lg:mt-6">CONTACT</h2>
-            <ul className="text-sm text-gray-900 space-y-2">
-              <li>StayVenture NY Office</li>
-              <li>789 Madison Avenue</li>
-              <li>New York, NY 10065</li>
-              <li>Phone: +1 (212) 456-7890</li>
-              <li>Email: contact@stayventure.com</li>
-            </ul>
+            {/* CONTACT */}
+            <div className="text-center lg:text-left">
+              <h2 className="font-semibold text-black mb-4">CONTACT</h2>
+              <ul className="text-sm text-gray-900 space-y-2">
+                <li>StayVenture NY Office</li>
+                <li>789 Madison Avenue</li>
+                <li>New York, NY 10065</li>
+                <li> +1 (212) 456-7890</li>
+                <li>contact@stayventure.com</li>
+              </ul>
+            </div>
           </div>
-        </div> */}
-        <div className="flex flex-col lg:flex-row justify-center lg:justify-around items-center lg:items-start gap-10 lg:gap-24 px-6 sm:px-10 md:px-16 lg:px-0 mb-14">
-          {/* COMPANY */}
-          <div className="text-center lg:text-left">
-            <h2 className="font-semibold text-black mb-4">COMPANY</h2>
-            <ul className="text-sm text-gray-900 space-y-2">
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Browse Cars</a>
-              </li>
-              <li>
-                <a href="#">Car List</a>
-              </li>
-              <li>
-                <a href="#">About Us</a>
-              </li>
-            </ul>
-          </div>
+        </motion.div>
+      </motion.div>
 
-          {/* RESOURCES */}
-          <div className="text-center lg:text-left">
-            <h2 className="font-semibold text-black mb-4">RESOURCES</h2>
-            <ul className="text-sm text-gray-900 space-y-2">
-              <li>
-                <a href="#">Help Center</a>
-              </li>
-              <li>
-                <a href="#">Insurance</a>
-              </li>
-              <li>
-                <a href="#">Privacy</a>
-              </li>
-              <li>
-                <a href="#">Terms</a>
-              </li>
-            </ul>
-          </div>
-
-          {/* CONTACT */}
-          <div className="text-center lg:text-left">
-            <h2 className="font-semibold text-black mb-4">CONTACT</h2>
-            <ul className="text-sm text-gray-900 space-y-2">
-              <li>StayVenture NY Office</li>
-              <li>789 Madison Avenue</li>
-              <li>New York, NY 10065</li>
-              <li> +1 (212) 456-7890</li>
-              <li>contact@stayventure.com</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <p className="border-t border-gray-300 pt-4 mt-8 text-center text-xs md:text-sm text-gray-500">
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="border-t border-gray-300 pt-4 mt-8 text-center text-xs md:text-sm text-gray-500"
+      >
         © 2025 Brand. All rights reserved.
-      </p>
-    </footer>
+      </motion.p>
+    </motion.footer>
   );
 }
 

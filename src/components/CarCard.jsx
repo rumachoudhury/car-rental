@@ -20,7 +20,7 @@ function CarCard({ car }) {
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 "
         />
         {car.isAvailable && (
-          <p className="absolute top-4 left-4 bg-primary/90 text-white text-xs px-2.5 py-1 rounded-full">
+          <p className="absolute top-4 left-4 bg-primary-dull/90 text-white text-xs px-2.5 py-1 rounded-full">
             Available Now
           </p>
         )}
@@ -62,9 +62,9 @@ function CarCard({ car }) {
           </div>
 
           {/* 3rd one */}
-          <div className="flex items-center text-sm text-muted-foreground">
+          <div className="flex items-center text-sm text-muted-foreground ">
             <img src={assets.car_icon} alt="Car icon" className="h-4 mr-2" />
-            <span>{car.transmission} Seats</span>
+            <span>{car.transmission} </span>
           </div>
 
           {/* 4th one */}
@@ -72,7 +72,7 @@ function CarCard({ car }) {
             <img
               src={assets.location_icon}
               alt="Location icon"
-              className="h-4 mr-2"
+              className="h-4 mr-2 ml-2"
             />
             <span>{car.seating_capacity} Seats</span>
           </div>
