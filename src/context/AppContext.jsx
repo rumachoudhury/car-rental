@@ -7,13 +7,13 @@ import {
 } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const currency = import.meta.env.VITE_CURRENCY;
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
@@ -91,7 +91,7 @@ export const AppProvider = ({ children }) => {
   }, [token, fetchUser]);
 
   const value = {
-    // navigate,
+    navigate,
     currency,
     axios,
     user,
