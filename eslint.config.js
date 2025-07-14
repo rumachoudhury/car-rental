@@ -25,6 +25,7 @@ export default defineConfig([
     rules: {
       // 'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]|^motion$" }],
+      "react-refresh/only-export-components": "off", // Add this line for Disable the react-refresh/only-export-components rule
     },
   },
 ]);
