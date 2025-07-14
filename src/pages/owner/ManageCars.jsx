@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { assets } from "../../assets/assets";
 import Title from "../../components/owner/Title";
 import { useAppContext } from "../../context/AppContext";
@@ -9,7 +9,20 @@ export default function ManageCars() {
 
   const [cars, setCars] = useState([]);
 
-  const fetchOwnerCars = async () => {
+  // const fetchOwnerCars = async () => {
+  //   try {
+  //     const { data } = await axios.get("/api/owner/cars");
+  //     if (data.success) {
+  //       setCars(data.cars);
+  //     } else {
+  //       toast.error(data.message);
+  //     }
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   }
+  // };
+
+  const fetchOwnerCars = useCallback(async () => {
     try {
       const { data } = await axios.get("/api/owner/cars");
       if (data.success) {
@@ -20,7 +33,7 @@ export default function ManageCars() {
     } catch (error) {
       toast.error(error.message);
     }
-  };
+  }, [axios]);
 
   const toggleAvailablity = async (carId) => {
     try {
@@ -58,7 +71,7 @@ export default function ManageCars() {
 
   useEffect(() => {
     isOwner && fetchOwnerCars();
-  }, [isOwner]);
+  }, [isOwner, fetchOwnerCars]);
 
   return (
     <div className="px-4 pt-10 md:px-10 w-full">

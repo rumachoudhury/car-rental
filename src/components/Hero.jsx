@@ -25,9 +25,6 @@ export default function Hero() {
       transition={{ duration: 0.8 }}
       className="h-screen flex flex-col justify-center items-center gap-14 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 text-center"
     >
-      {/* <h1 className="text-3xl md:text-5xl font-semibold sm:mt-30 lg:mt-10">
-        Turn Heads with Our Luxury Car Rentals
-      </h1> */}
       <motion.h1
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

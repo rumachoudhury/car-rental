@@ -14,7 +14,7 @@ function AddCar() {
     model: "",
     year: 0,
     // pricePerday: 0,
-    pricePerDay: 0, // ✅ fix the key name here
+    pricePerDay: 0,
     category: "",
     transmission: "",
     fuel_type: "",
@@ -45,7 +45,7 @@ function AddCar() {
           model: "",
           year: 0,
           // pricePerday: 0,
-          pricePerDay: 0, // ✅ fix the key name here
+          pricePerDay: 0,
           category: "",
           transmission: "",
           fuel_type: "",
@@ -136,14 +136,7 @@ function AddCar() {
 
           <div className="flex flex-col w-full">
             <label>Daily Price ({currency})</label>
-            {/* <input
-              type="number"
-              placeholder="100"
-              required
-              className="px-3 py-2 border border-borderColor rounded-md outline-none"
-              value={car.pricePerday}
-              onChange={(e) => setCar({ ...car, pricePerday: e.target.value })}
-            /> */}
+
             <input
               type="number"
               placeholder="100"

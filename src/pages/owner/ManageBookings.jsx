@@ -9,15 +9,6 @@ function ManageBookings() {
 
   const [bookings, setBookings] = useState([]);
 
-  // const fetchOwnerBooings = async () => {
-  //   try {
-  //     const { data } = await axios.get("/api/bookings/owner");
-  //     data.success ? setBookings(data.bookings) : toast.error(data.message);
-  //   } catch (error) {
-  //     toast.error(error.message);
-  //   }
-  // };
-
   const fetchOwnerBooings = useCallback(async () => {
     //**useCallback with axios as dependency
     try {
@@ -45,10 +36,6 @@ function ManageBookings() {
       toast.error(error.message);
     }
   };
-
-  // useEffect(() => {
-  //   fetchOwnerBooings();
-  // }, []);
 
   useEffect(() => {
     //** useEffect now has all dependencies

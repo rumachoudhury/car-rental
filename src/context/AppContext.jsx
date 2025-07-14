@@ -1,14 +1,19 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+// import { useNavigate } from "react-router-dom";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
-
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const currency = import.meta.env.VITE_CURRENCY;
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
@@ -16,14 +21,13 @@ export const AppProvider = ({ children }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [pickupDate, setPickupDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-
   const [cars, setCars] = useState([]);
 
-  //function to check if user is logged in
   // const fetchUser = async () => {
   //   try {
   //     const { data } = await axios.get("/api/user/data");
-  //     if (data.success) {
+  //     console.log("Fetched cars:", data);
+  //     if (data.success && data.user) {
   //       setUser(data.user);
   //       setIsOwner(data.user.role === "owner");
   //     } else {
@@ -33,22 +37,21 @@ export const AppProvider = ({ children }) => {
   //     toast.error(error.message);
   //   }
   // };
-  const fetchUser = async () => {
+
+  //function to fetch all cars from the server
+
+  const fetchUser = useCallback(async () => {
     try {
       const { data } = await axios.get("/api/user/data");
-      console.log("Fetched cars:", data); // ✅ ADD THIS LINE
       if (data.success && data.user) {
         setUser(data.user);
         setIsOwner(data.user.role === "owner");
-      } else {
-        navigate("/");
       }
     } catch (error) {
       toast.error(error.message);
     }
-  };
+  }, []);
 
-  //function to fetch all cars from the server
   const fetchCars = async () => {
     try {
       const { data } = await axios.get("/api/user/cars");
@@ -68,17 +71,11 @@ export const AppProvider = ({ children }) => {
     toast.success("You have been logged out");
   };
 
-  //uaeEffect to retrive token from localStorage
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   setToken(token);
-  //   fetchCars();
-  // }, []);
   useEffect(() => {
     const token = localStorage.getItem("token");
     setToken(token);
 
-    // ✅ Only fetch cars if token exists and attach it first
+    //Only fetch cars if token exists and attach it first
     if (token) {
       axios.defaults.headers.common["Authorization"] = `${token}`;
       fetchCars();
@@ -91,10 +88,10 @@ export const AppProvider = ({ children }) => {
       axios.defaults.headers.common["Authorization"] = `${token}`;
       fetchUser();
     }
-  }, [token]);
+  }, [token, fetchUser]);
 
   const value = {
-    navigate,
+    // navigate,
     currency,
     axios,
     user,

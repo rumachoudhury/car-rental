@@ -17,4 +17,3 @@ function NavbarOwner() {
 }
 
 export default NavbarOwner;
-// logo4

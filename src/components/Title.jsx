@@ -13,7 +13,6 @@ function Title({ title, subTitle, align, showUnderline = false }) {
           {title}
         </h1>
 
-        {/* <Icons.underline className="absolute bottom-0 left-[51%] -translate-x-[50%] w-[280px] text-indigo-500" /> */}
         {/* Conditionally show underline */}
         {showUnderline && (
           <Icons.underline className="absolute bottom-0 left-[54%] -translate-x-[50%] w-[280px] text-blue-500" />
